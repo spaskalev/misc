@@ -8,6 +8,12 @@ a collection of various go packages
 * ioutil - various io constructs, buffered writer and reader implementations
 * predictor - PPP Predictor Compression Protocol as specified in RFC1978
 
+the commands directory contains tools
+
+* commands/mtf - mtf transform, follwed by fibonacci encoding compressor
+* commands/pdc - a predictor compressor
+* commands/plaindiff - a text file diff implementation
+
 [![Build Status](https://drone.io/github.com/solarsea/misc/status.png)](https://drone.io/github.com/solarsea/misc/latest)
 
 ##### License
