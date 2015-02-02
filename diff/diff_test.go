@@ -1,4 +1,4 @@
-package diff
+package diff // import "github.com/solarsea/misc/diff"
 
 import (
 	_ "0dev.org/bits"

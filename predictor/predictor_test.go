@@ -1,4 +1,4 @@
-package predictor
+package predictor // import "github.com/solarsea/misc/predictor"
 
 import (
 	diff "0dev.org/diff"

@@ -1,4 +1,4 @@
-package fibonacci
+package fibonacci // import "github.com/solarsea/misc/fibonacci"
 
 import (
 	diff "0dev.org/diff"

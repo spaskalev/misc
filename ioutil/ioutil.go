@@ -1,5 +1,5 @@
 // Package ioutil contains various constructs for io operations.
-package ioutil
+package ioutil // import "github.com/solarsea/misc/ioutil"
 
 import (
 	"io"

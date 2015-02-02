@@ -1,4 +1,4 @@
-package ioutil
+package ioutil // import "github.com/solarsea/misc/ioutil"
 
 import (
 	diff "0dev.org/diff"

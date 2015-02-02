@@ -1,4 +1,4 @@
-package bits
+package bits // import "github.com/solarsea/misc/bits"
 
 import (
 	"strconv"
