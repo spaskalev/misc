@@ -1,9 +1,9 @@
 package predictor // import "github.com/solarsea/misc/predictor"
 
 import (
-	diff "0dev.org/diff"
 	"bytes"
 	"fmt"
+	diff "github.com/solarsea/misc/diff"
 	"io/ioutil"
 	"testing"
 )

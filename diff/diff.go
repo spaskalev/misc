@@ -1,9 +1,9 @@
 // Package diff provides a diff algorithm implementation
 // for finite, indexable sequences with comparable elements.
-package diff
+package diff // import "github.com/solarsea/misc/diff"
 
 import (
-	bits "0dev.org/bits"
+	bits "github.com/solarsea/misc/bits"
 )
 
 // Interface abstracts the required knowledge to perform a diff

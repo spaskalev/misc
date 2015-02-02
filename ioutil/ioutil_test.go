@@ -1,9 +1,9 @@
 package ioutil // import "github.com/solarsea/misc/ioutil"
 
 import (
-	diff "0dev.org/diff"
 	"bytes"
 	"errors"
+	diff "github.com/solarsea/misc/diff"
 	"io"
 	"testing"
 )
