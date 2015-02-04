@@ -1,4 +1,4 @@
-package fibonacci // import "github.com/solarsea/misc/fibonacci"
+package fibonacci // import "github.com/solarsea/misc/encoding/fibonacci"
 
 import (
 	"bytes"
