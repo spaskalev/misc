@@ -1,5 +1,5 @@
 // Package parse provides a simple parser combinator library
-package parse
+package parse // import "github.com/solarsea/misc/parse"
 
 // The N struct is a parser result node.
 type N struct {

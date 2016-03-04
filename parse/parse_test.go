@@ -1,4 +1,4 @@
-package parse
+package parse // import "github.com/solarsea/misc/parse"
 
 import (
 	"testing"
