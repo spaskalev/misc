@@ -91,20 +91,25 @@ func recursiveDiff(bounds box, mat matrix) Delta {
 
 // Finds the largest common substring by looking at the provided match matrix
 // starting from (bounds.x, bounds.y) with lengths bounds.lenX, bounds.lenY
-func largest(bounds box, mat matrix) (result match) {
+func largest(bounds box, mat matrix) match {
+	var result match
+
+	// Look for LCS in the too-right half, including the main diagonal
 	for i := bounds.x; i < bounds.lenX && result.length <= (bounds.lenX-bounds.x); i++ {
 		var m match = search(i, bounds.y, bounds.lenX, bounds.lenY, mat)
 		if m.length > result.length {
 			result = m
 		}
 	}
+
+	// Look for LCS in the bottom-left half, excluding the main diagonal
 	for j := bounds.y + 1; j < bounds.lenY && result.length <= (bounds.lenY-bounds.y); j++ {
 		var m match = search(bounds.x, j, bounds.lenX, bounds.lenY, mat)
 		if m.length > result.length {
 			result = m
 		}
 	}
-	return
+	return result
 }
 
 // Searches the main diagonal for the longest sequential match line
