@@ -1,37 +1,38 @@
 package diff // import "github.com/solarsea/misc/diff"
 
 import (
+	"fmt"
 	"testing"
 )
 
-// A diff.Interface implementation for testing purposes
-type diffSlice struct {
-	first  []rune
-	second []rune
-}
-
-// Required per diff.Interface
-func (d diffSlice) Len() (int, int) {
-	return len(d.first), len(d.second)
-}
-
-// Required per diff.Interface
-func (d diffSlice) Equal(i, j int) bool {
-	return d.first[i] == d.second[j]
-}
-
-func TestDiff(t *testing.T) {
-	data := diffSlice{
-		[]rune("abcdefgh"),
-		[]rune("abbcedfh"),
+func Test(t *testing.T) {
+	data := []struct {
+		seq1  string
+		seq2  string
+		delta Delta
+	}{
+		{"", "", Delta{}},
+		{"", "a", Delta{Added: []Mark{Mark{0, 1}}}},
+		{"a", "", Delta{Removed: []Mark{Mark{0, 1}}}},
+		//
+		{"a", "a", Delta{}},
+		{"a", "aa", Delta{Added: []Mark{Mark{1, 2}}}},
+		{"aa", "a", Delta{Removed: []Mark{Mark{1, 2}}}},
+		//
+		{"abcdefgh", "abbcedfh", Delta{
+			Added:   []Mark{Mark{2, 3}, Mark{5, 6}},
+			Removed: []Mark{Mark{3, 4}, Mark{6, 7}},
+		}},
 	}
 
-	result := Diff(data)
-	if len(result.Added) != 2 ||
-		result.Added[0].From != 2 || result.Added[0].Length != 3 ||
-		result.Added[1].From != 5 || result.Added[1].Length != 6 ||
-		result.Removed[0].From != 3 || result.Removed[0].Length != 4 ||
-		result.Removed[1].From != 6 || result.Removed[1].Length != 7 {
-		t.Error("Unexpected diff results", result)
+	for _, testCase := range data {
+		delta := Diff(D{len(testCase.seq1), len(testCase.seq2), func(i, j int) bool {
+			return testCase.seq1[i] == testCase.seq2[j]
+		}})
+
+		if fmt.Sprintf("%v", delta) != fmt.Sprintf("%v", testCase.delta) {
+			t.Errorf("Unexpected delta for data\n[%s]\n[%s]\nGot %v\nExpected %v",
+				testCase.seq1, testCase.seq2, delta, testCase.delta)
+		}
 	}
 }
