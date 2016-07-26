@@ -12,16 +12,16 @@ func Test(t *testing.T) {
 		delta Delta
 	}{
 		{"", "", Delta{}},
-		{"", "a", Delta{Added: []Mark{Mark{0, 1}}}},
-		{"a", "", Delta{Removed: []Mark{Mark{0, 1}}}},
+		{"", "a", Delta{Added: [][]int{[]int{0}}}},
+		{"a", "", Delta{Removed: [][]int{[]int{0}}}},
 		//
 		{"a", "a", Delta{}},
-		{"a", "aa", Delta{Added: []Mark{Mark{1, 2}}}},
-		{"aa", "a", Delta{Removed: []Mark{Mark{1, 2}}}},
+		{"a", "aa", Delta{Added: [][]int{[]int{1}}}},
+		{"aa", "a", Delta{Removed: [][]int{[]int{1}}}},
 		//
 		{"abcdefgh", "abbcedfh", Delta{
-			Added:   []Mark{Mark{2, 3}, Mark{5, 6}},
-			Removed: []Mark{Mark{3, 4}, Mark{6, 7}},
+			Added:   [][]int{[]int{2}, []int{5}},
+			Removed: [][]int{[]int{3}, []int{6}},
 		}},
 	}
 
