@@ -95,7 +95,7 @@ func largest(bounds box, mat matrix) match {
 	var result match
 
 	// Look for LCS in the too-right half, including the main diagonal
-	for i := bounds.x; i < bounds.lenX && result.length <= (bounds.lenX-bounds.x); i++ {
+	for i := bounds.x; i < bounds.lenX && result.length < (bounds.lenX-i); i++ {
 		var m match = search(i, bounds.y, bounds.lenX, bounds.lenY, mat)
 		if m.length > result.length {
 			result = m
@@ -103,7 +103,7 @@ func largest(bounds box, mat matrix) match {
 	}
 
 	// Look for LCS in the bottom-left half, excluding the main diagonal
-	for j := bounds.y + 1; j < bounds.lenY && result.length <= (bounds.lenY-bounds.y); j++ {
+	for j := bounds.y + 1; j < bounds.lenY && result.length < (bounds.lenY-j); j++ {
 		var m match = search(bounds.x, j, bounds.lenX, bounds.lenY, mat)
 		if m.length > result.length {
 			result = m
