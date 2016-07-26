@@ -21,8 +21,8 @@ func TestWriterFunc(t *testing.T) {
 	output = buffer.Bytes()
 
 	// Diff the result against the initial input
-	delta := diff.Diff(diff.D{len(input), len(output),
-		func(i, j int) bool { return input[i] == output[j] }})
+	delta := diff.Diff(diff.WithEqual(len(input), len(output),
+		func(i, j int) bool { return input[i] == output[j] }))
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Differences detected ", delta)
 	}
@@ -41,8 +41,8 @@ func TestReaderFunc(t *testing.T) {
 	output = buffer.Bytes()
 
 	// Diff the result against the initial input
-	delta := diff.Diff(diff.D{len(input), len(output),
-		func(i, j int) bool { return input[i] == output[j] }})
+	delta := diff.Diff(diff.WithEqual(len(input), len(output),
+		func(i, j int) bool { return input[i] == output[j] }))
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Differences detected ", delta)
 	}

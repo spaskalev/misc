@@ -42,7 +42,7 @@ func TestCompressorSample(t *testing.T) {
 	}
 
 	result := buf.Bytes()
-	delta := diff.Diff(diff.D{len(result), len(output), func(i, j int) bool { return result[i] == output[j] }})
+	delta := diff.Diff(diff.WithEqual(len(result), len(output), func(i, j int) bool { return result[i] == output[j] }))
 
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Unexpected compressed output", delta)
@@ -56,8 +56,8 @@ func TestDecompressorSample(t *testing.T) {
 		t.Error("Unexpected error while decompressing", err)
 	}
 
-	delta := diff.Diff(diff.D{len(result), len(input),
-		func(i, j int) bool { return result[i] == input[j] }})
+	delta := diff.Diff(diff.WithEqual(len(result), len(input),
+		func(i, j int) bool { return result[i] == input[j] }))
 
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Unexpected decompressed output", delta)
@@ -136,8 +136,8 @@ func cycle(input []byte, step int) error {
 	}
 
 	// Diff the result against the initial input
-	delta := diff.Diff(diff.D{len(input), len(decompressed),
-		func(i, j int) bool { return input[i] == decompressed[j] }})
+	delta := diff.Diff(diff.WithEqual(len(input), len(decompressed),
+		func(i, j int) bool { return input[i] == decompressed[j] }))
 
 	// Return a well-formated error if any differences are found
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {

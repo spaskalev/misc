@@ -21,8 +21,8 @@ func TestMTF(t *testing.T) {
 	io.Copy(&output, decoder)
 	processed := output.Bytes()
 
-	delta := diff.Diff(diff.D{Len1: len(data), Len2: len(processed),
-		EqualFunc: func(i, j int) bool { return data[i] == processed[j] }})
+	delta := diff.Diff(diff.WithEqual(len(data), len(processed),
+		func(i, j int) bool { return data[i] == processed[j] }))
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Differences detected ", delta, processed)
 	}

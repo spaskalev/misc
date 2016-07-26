@@ -89,9 +89,9 @@ func TestWriterReader(t *testing.T) {
 	io.Copy(&out, r)
 	decoded := out.Bytes()
 
-	delta := diff.Diff(diff.D{Len1: len(decoded), Len2: len(input), EqualFunc: func(i, j int) bool {
+	delta := diff.Diff(diff.WithEqual(len(decoded), len(input), func(i, j int) bool {
 		return decoded[i] == input[j]
-	}})
+	}))
 
 	if len(delta.Added) > 0 || len(delta.Removed) > 0 {
 		t.Error("Differences detected ", delta)
