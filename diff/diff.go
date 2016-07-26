@@ -139,17 +139,23 @@ func search(x, y, lenX, lenY int, mat matrix) (result match) {
 }
 
 // A diff.Interface implementation with plugable Equal function
-type D struct {
-	Len1, Len2 int
-	EqualFunc  func(i, j int) bool
+type impl struct {
+	len1, len2 int
+	equal func(i, j int) bool
 }
 
 // Required per diff.Interface
-func (d D) Len() (int, int) {
-	return d.Len1, d.Len2
+func (d impl) Len() (int, int) {
+	return d.len1, d.len2
 }
 
 // Required per diff.Interface
-func (d D) Equal(i, j int) bool {
-	return d.EqualFunc(i, j)
+func (d impl) Equal(i, j int) bool {
+	return d.equal(i, j)
+}
+
+// Returns a diff.Interface implementation
+// for the specified lengths and equal function
+func WithEqual(len1 int, len2 int, equal func(int, int) bool) Interface {
+	return impl{len1: len1, len2: len2, equal: equal}
 }
