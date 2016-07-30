@@ -15,12 +15,16 @@ type Interface interface {
 	Equal(int, int) bool
 }
 
+// A Mark struct marks a length in sequence starting with an offset
+type Mark struct {
+	From   int
+	Length int
+}
+
 // A Delta struct is the result of a Diff operation
 type Delta struct {
-	// Indices of added elements in the second sequence
-	Added   [][]int
-	// Indices of removed elements from the first sequence
-	Removed [][]int
+	Added   []Mark
+	Removed []Mark
 }
 
 // Diffs the provided data and returns e Delta struct
@@ -66,18 +70,10 @@ func recursiveDiff(bounds box, mat matrix) Delta {
 	if m.length == 0 { // Recursion terminates
 		var immediate Delta
 		if bounds.lenY-bounds.y > 0 {
-			adds := make([]int, bounds.lenY - bounds.y)
-			for i := 0; i < len(adds); i++ {
-				adds[i] = bounds.y+i
-			}
-			immediate.Added = [][]int{adds}
+			immediate.Added = []Mark{Mark{bounds.y, bounds.lenY}}
 		}
 		if bounds.lenX-bounds.x > 0 {
-			removes := make([]int, bounds.lenX - bounds.x)
-			for i := 0; i < len(removes); i++ {
-				removes[i] = bounds.x+i
-			}
-			immediate.Removed = [][]int{removes}
+			immediate.Removed = []Mark{Mark{bounds.x, bounds.lenX}}
 		}
 		return immediate
 	}

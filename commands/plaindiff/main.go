@@ -28,37 +28,36 @@ func main() {
 
 	gen := source(result)
 	out := bufio.NewWriter(os.Stdout)
-	for next, added, mark := gen(); next; next, added, mark = gen() {
+	for have, added, mark := gen(); have; have, added, mark = gen() {
 		var from []line = hd.line(!added)
 
 		fmt.Fprintln(out)
-
-		for i := 0; i < len(mark); i++ {
-			fmt.Fprint(out, mark[i]) // Line numbers start from 1 for most people :)
+		for i := mark.From; i < mark.Length; i++ {
+			fmt.Fprint(out, i+1) // Line numbers start from 1 for most people :)
 			if added {
 				fmt.Fprint(out, " > ")
 			} else {
 				fmt.Fprint(out, " < ")
 			}
-			fmt.Fprintln(out, from[mark[i]].text)
+			fmt.Fprintln(out, from[i].text)
 		}
 	}
 	out.Flush()
 }
 
 // Returns a closure over the provided diff.Delta
-// that returns change indices while prioritizing removals
-func source(d diff.Delta) func() (bool, bool, []int) {
+// that returns diff.Mark entries while prioritizing removals when possible
+func source(d diff.Delta) func() (bool, bool, diff.Mark) {
 	var addedAt, removedAt int = 0, 0
-	return func() (bool, bool, []int) {
+	return func() (bool, bool, diff.Mark) {
 		var addsOver bool = addedAt == len(d.Added)
 		var removesOver bool = removedAt == len(d.Removed)
 
-		var add, remove []int
+		var add, remove diff.Mark
 
-		// Check whether both differences have been exhausted
+		// Check whether both mark slices have been exhausted
 		if addsOver && removesOver {
-			return false, false, nil
+			return false, false, diff.Mark{}
 		}
 
 		// Return an add if removes are over
@@ -79,7 +78,7 @@ func source(d diff.Delta) func() (bool, bool, []int) {
 		remove = d.Removed[removedAt]
 
 		// Prioritize a remove if it happens before an add
-		if remove[0] <= add[0] {
+		if remove.From <= add.From {
 			removedAt++
 			return true, false, remove
 		}
