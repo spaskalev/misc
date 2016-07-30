@@ -2,7 +2,7 @@ package mtf // import "github.com/solarsea/misc/encoding/mtf"
 
 import (
 	"bytes"
-	diff "github.com/solarsea/misc/diff"
+	diff "github.com/solarsea/diff"
 	"io"
 	"testing"
 )

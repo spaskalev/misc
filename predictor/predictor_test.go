@@ -3,7 +3,7 @@ package predictor // import "github.com/solarsea/misc/predictor"
 import (
 	"bytes"
 	"fmt"
-	diff "github.com/solarsea/misc/diff"
+	diff "github.com/solarsea/diff"
 	"io/ioutil"
 	"testing"
 )

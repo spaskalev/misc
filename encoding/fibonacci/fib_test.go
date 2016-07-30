@@ -2,7 +2,7 @@ package fibonacci // import "github.com/solarsea/misc/encoding/fibonacci"
 
 import (
 	"bytes"
-	diff "github.com/solarsea/misc/diff"
+	diff "github.com/solarsea/diff"
 	"io"
 	"strings"
 	"testing"

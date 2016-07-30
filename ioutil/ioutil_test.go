@@ -3,7 +3,7 @@ package ioutil // import "github.com/solarsea/misc/ioutil"
 import (
 	"bytes"
 	"errors"
-	diff "github.com/solarsea/misc/diff"
+	diff "github.com/solarsea/diff"
 	"io"
 	"testing"
 )
