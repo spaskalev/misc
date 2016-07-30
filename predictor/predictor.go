@@ -3,7 +3,7 @@
 package predictor // import "github.com/solarsea/misc/predictor"
 
 import (
-	bits "github.com/solarsea/misc/bits"
+	bits "github.com/solarsea/bits"
 	iou "github.com/solarsea/misc/ioutil"
 	"io"
 )
