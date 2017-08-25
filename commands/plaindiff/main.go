@@ -6,25 +6,24 @@ import (
 	diff "github.com/solarsea/diff"
 	"hash"
 	"hash/fnv"
-	"io"
 	"os"
+	"path/filepath"
 )
 
 const usage = "Usage: plaindiff <file1> <file2>\n"
 
 func main() {
-	var args []string = os.Args
-	if len(args) != 3 {
+	if len(os.Args) <= 3 {
 		os.Stderr.WriteString(usage)
 		os.Exit(1)
 	}
 
 	var hd hashDiff
 	hd.hash = fnv.New64a()
-	hd.first = read(args[1], hd.hash)
-	hd.second = read(args[2], hd.hash)
+	hd.first = read(os.Args[2], hd.hash)
+	hd.second = read(os.Args[1], hd.hash)
 
-	var result diff.Delta = diff.Diff(&hd)
+	var result diff.Delta = diff.Diff(diff.WithEqual(len(hd.first), len(hd.second), hd.Equal))
 
 	gen := source(result)
 	out := bufio.NewWriter(os.Stdout)
@@ -100,14 +99,8 @@ type hashDiff struct {
 func (h *hashDiff) Equal(i, j int) bool {
 	if h.first[i].hash != h.second[j].hash {
 		return false
-	} else {
-		return h.first[i].text == h.second[j].text
 	}
-}
-
-// Required per diff.Interface
-func (h *hashDiff) Len() (int, int) {
-	return len(h.first), len(h.second)
+	return h.first[i].text == h.second[j].text
 }
 
 // A helper method for getting a line slice
@@ -126,41 +119,25 @@ type line struct {
 
 // Reads all lines in a file and returns a line entry for each
 func read(name string, h hash.Hash64) []line {
-	var f *os.File
-	var e error
-
-	f, e = os.Open(name)
-	fatal(e)
-
-	var result []line = lines(f, h)
-	fatal(f.Close())
-
-	return result
-}
-
-// Reads all lines and returns a line entry for each
-func lines(r io.Reader, h hash.Hash64) []line {
-	var scanner *bufio.Scanner = bufio.NewScanner(r)
-	var result []line = make([]line, 0)
+	abs, err := filepath.Abs(name)
+	fatal(err)
+	f, err := os.Open(abs)
+	fatal(err)
+	scanner := bufio.NewScanner(f)
+	result := make([]line, 0)
 	for scanner.Scan() {
 		h.Reset()
 		h.Write(scanner.Bytes())
 		result = append(result, line{hash: h.Sum64(), text: scanner.Text()})
 	}
+	fatal(f.Close())
 	return result
-}
-
-// Write an error to stderr
-func stderr(e error) {
-	if e != nil {
-		os.Stderr.WriteString(e.Error())
-	}
 }
 
 // Write an error to stderr and exit
 func fatal(e error) {
 	if e != nil {
-		stderr(e)
+		os.Stderr.WriteString(e.Error())
 		os.Exit(1)
 	}
 }
