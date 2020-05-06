@@ -1,0 +1,4 @@
+github.com/spaskalev/bits v0.0.0-20200506124738-2089865c8ee0 h1:AN2OKZP75HvqNWFgjTKcsjYLeWnFhjC9VLc7AYLDtDY=
+github.com/spaskalev/bits v0.0.0-20200506124738-2089865c8ee0/go.mod h1:HTcor5kmtFlwl7eZ+2fk7LxvVcGzNjesf1jzK3M8qgY=
+github.com/spaskalev/diff v0.0.0-20200506125303-f8e7c6e6d095 h1:2Xu9CF1zGBJoVNI1gS48NSjcpqnfV1xvmMcWG/1QWSc=
+github.com/spaskalev/diff v0.0.0-20200506125303-f8e7c6e6d095/go.mod h1:PZ0/pFMIrrEzr2vxVPH5agSiQz9MWt1ysz33Jw1ZlUU=
