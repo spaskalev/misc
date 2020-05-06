@@ -1,4 +1,4 @@
-package parse // import "github.com/solarsea/misc/parse"
+package parse // import "github.com/spaskalev/misc/parse"
 
 import (
 	"testing"

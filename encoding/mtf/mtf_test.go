@@ -1,8 +1,8 @@
-package mtf // import "github.com/solarsea/misc/encoding/mtf"
+package mtf // import "github.com/spaskalev/misc/encoding/mtf"
 
 import (
 	"bytes"
-	diff "github.com/solarsea/diff"
+	diff "github.com/spaskalev/diff"
 	"io"
 	"testing"
 )

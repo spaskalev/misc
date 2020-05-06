@@ -1,8 +1,8 @@
-package fibonacci // import "github.com/solarsea/misc/encoding/fibonacci"
+package fibonacci // import "github.com/spaskalev/misc/encoding/fibonacci"
 
 import (
 	"bytes"
-	diff "github.com/solarsea/diff"
+	diff "github.com/spaskalev/diff"
 	"io"
 	"strings"
 	"testing"

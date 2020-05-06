@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	diff "github.com/solarsea/diff"
+	diff "github.com/spaskalev/diff"
 	"hash"
 	"hash/fnv"
 	"os"

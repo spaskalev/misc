@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
-	fib "github.com/solarsea/misc/encoding/fibonacci"
-	mtf "github.com/solarsea/misc/encoding/mtf"
-	iou "github.com/solarsea/misc/ioutil"
+	fib "github.com/spaskalev/misc/encoding/fibonacci"
+	mtf "github.com/spaskalev/misc/encoding/mtf"
+	iou "github.com/spaskalev/misc/ioutil"
 	"io"
 	"os"
 )

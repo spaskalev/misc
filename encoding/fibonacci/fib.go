@@ -9,7 +9,7 @@
 // The codes are reversed so that they are easily stored in uints,
 // effectively avoiding the need to store the number of leading zeroes
 // 0 - 11, 1 - 110, 2 - 1100, 3 - 1101, 4 - 11000
-package fibonacci // import "github.com/solarsea/misc/encoding/fibonacci"
+package fibonacci // import "github.com/spaskalev/misc/encoding/fibonacci"
 
 import (
 	"io"

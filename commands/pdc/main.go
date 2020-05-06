@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	iou "github.com/solarsea/misc/ioutil"
-	predictor "github.com/solarsea/misc/predictor"
+	iou "github.com/spaskalev/misc/ioutil"
+	predictor "github.com/spaskalev/misc/predictor"
 	"io"
 	"os"
 )

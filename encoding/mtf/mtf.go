@@ -1,5 +1,5 @@
 // Package mtf provides a move-to-front encoder and decoder implementations
-package mtf // import "github.com/solarsea/misc/encoding/mtf"
+package mtf // import "github.com/spaskalev/misc/encoding/mtf"
 
 import (
 	"io"

@@ -1,10 +1,10 @@
 // Package predictor implements the predictor compression/decompression algorithm
 // as specified by RFC1978 - PPP Predictor Compression Protocol
-package predictor // import "github.com/solarsea/misc/predictor"
+package predictor // import "github.com/spaskalev/misc/predictor"
 
 import (
-	bits "github.com/solarsea/bits"
-	iou "github.com/solarsea/misc/ioutil"
+	bits "github.com/spaskalev/bits"
+	iou "github.com/spaskalev/misc/ioutil"
 	"io"
 )
 
