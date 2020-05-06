@@ -13,7 +13,7 @@ import (
 const usage = "Usage: plaindiff <file1> <file2>\n"
 
 func main() {
-	if len(os.Args) <= 3 {
+	if len(os.Args) < 3 {
 		os.Stderr.WriteString(usage)
 		os.Exit(1)
 	}

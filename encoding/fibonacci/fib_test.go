@@ -32,7 +32,7 @@ func TestCoding(t *testing.T) {
 			t.Errorf("Unexpected value for %d - enc is %b, dec is %d\n", i, enc, dec)
 		}
 		if encLen != decLen {
-			t.Errorf("Unexpected difference between encoded and decoded lengths.", encLen, decLen)
+			t.Errorf("Unexpected difference between encoded (%d) and decoded (%d) lengths.", encLen, decLen)
 		}
 	}
 }
